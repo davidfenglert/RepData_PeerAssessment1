@@ -1,22 +1,17 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-author: "D. Englert"
-date: "April 15, 2017"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
+D. Englert  
+April 15, 2017  
 
-```{r Set options}
 
+```r
 knitr::opts_chunk$set(echo = TRUE)
 
 library(ggplot2)
-
 ```
 ## ## Loading and preprocessing the data
 
-```{r Load data}
+
+```r
 activ.data <- read.csv("activity.csv")
 # Reformat dates
 activ.data$date <- as.Date(activ.data$date)
@@ -31,7 +26,8 @@ activ.data$time.of.day <-
 ```
 ## What is mean total number of steps taken per day?
 
-```{r steps per day}
+
+```r
 # total number of steps taken per day
 StepsPerDay <- 
     sapply(unique(activ.data$date),
@@ -52,11 +48,21 @@ legend(x = "topleft",
        legend = c(paste("mean =", mean.StepsPerDay),
                   paste("median =", median.StepsPerDay)),
        lty = c("solid", "dotted"), lwd = 3, col = c("blue", "green"))
+```
+
+![](PA1_template_files/figure-html/steps per day-1.png)<!-- -->
+
+```r
 print("  ")
+```
+
+```
+## [1] "  "
 ```
 ## What is the average daily activity pattern?
   
-```{r Average daily activity pattern}
+
+```r
 StepsPerInterv <- 
     sapply(unique(activ.data$time.of.day),
            function(x) mean(activ.data[activ.data$time.of.day == x, "steps"],
@@ -76,11 +82,21 @@ text(time.max.act, max.steps,
      pos = 4, col = "blue",
      paste("< Time of maximum activity, ",
            time.max.act, " minutes (", hr.min.max.act, ")", sep = ""))
+```
+
+![](PA1_template_files/figure-html/Average daily activity pattern-1.png)<!-- -->
+
+```r
 print("  ")
+```
+
+```
+## [1] "  "
 ```
 ## Imputing missing values
 
-```{r imputing missing values}
+
+```r
 # total number of missing values for steps
 n.missing.val <- sum(is.na(activ.data$steps))
 # mean values of steps across all time intervals
@@ -117,12 +133,29 @@ legend(x = "topleft",
        legend = c(paste("mean =", mean.StepsPerDay.imp),
                   paste("median =", median.StepsPerDay.imp)),
        lty = c("solid", "dotted"), lwd = 3, col = c("blue", "green"))
+```
+
+![](PA1_template_files/figure-html/imputing missing values-1.png)<!-- -->
+
+```r
 print("  ")
+```
+
+```
+## [1] "  "
+```
+
+```r
 print("The disribution of the number of steps per day is more symmetrical (without a large number of steps per day at zero) when the missing values are imputed.")
+```
+
+```
+## [1] "The disribution of the number of steps per day is more symmetrical (without a large number of steps per day at zero) when the missing values are imputed."
 ```
 ## Are there differences in activity patterns between weekdays and weekends?
 
-```{r activity patterns weekdays and weekend}
+
+```r
 #  factor variable indicating whether a given date is a weekday or weekend day
 weekends <- rep("weekday", nrow(activ.data))
 weekends[weekdays(activ.data$date) == "Saturday" |
@@ -140,7 +173,16 @@ p <- g + geom_line() +
     xlab("Interval (time of day in minutes)") +
     ylab("Number of steps") 
 print(p)
+```
+
+![](PA1_template_files/figure-html/activity patterns weekdays and weekend-1.png)<!-- -->
+
+```r
 print("  ")
+```
+
+```
+## [1] "  "
 ```
 
 
