@@ -13,7 +13,7 @@ library(ggplot2)
 
 ```r
 activ.data <- read.csv("activity.csv")
-# Reformat dates
+# Reformat the dates
 activ.data$date <- as.Date(activ.data$date)
 # Calculate time of day from interval text
 hrs <- substr(activ.data$interval, 1, nchar(activ.data$interval) - 2)

@@ -130,7 +130,7 @@ library(ggplot2)</code></pre>
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>## Loading and preprocessing the data</h2>
 <pre class="r"><code>activ.data &lt;- read.csv(&quot;activity.csv&quot;)
-# Reformat dates
+# Reformat the dates
 activ.data$date &lt;- as.Date(activ.data$date)
 # Calculate time of day from interval text
 hrs &lt;- substr(activ.data$interval, 1, nchar(activ.data$interval) - 2)
